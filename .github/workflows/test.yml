@@ -35,5 +35,6 @@ jobs:
           echo "new_version=${NEW_VERSION}" >> $GITHUB_OUTPUT
           git add .
           git commit -m "Bump Version to ${NEW_VERSION} [skip ci]"
+          git push origin
           git push origin --tags
-          echo "bumpversion_commit=${git log -1 --pretty=%H}" >> $GITHUB_OUTPUT
+          echo "bumpversion_commit=$(git log -1 --pretty=%H)" >> $GITHUB_OUTPUT
