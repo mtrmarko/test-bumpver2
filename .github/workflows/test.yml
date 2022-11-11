@@ -23,6 +23,7 @@ jobs:
         id: bump-version
         shell: bash
         run: |
+          sudo apt install bumpversion
           NEW_VERSION=$(bumpversion --allow-dirty --no-commit --list build | grep new_version | sed -r s,"^.*=",,)
           echo "new_version=${NEW_VERSION}" >> $GITHUB_OUTPUT
           git add .
