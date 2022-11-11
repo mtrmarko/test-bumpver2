@@ -17,6 +17,16 @@ jobs:
 
 # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo pushed me to run!
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Bump version
+        id: bump-version
+        shell: bash
+        run: |
+          cd ${{inputs.working-dir}}
+          NEW_VERSION=bumpversion --allow-dirty --no-commit --list build | grep new_version | sed -r s,"^.*=",,
+          echo "new_version=${NEW_VERSION}" >> $GITHUB_OUTPUT
+          git add .
+          git commit -m "Bump Version to ${NEW_VERSION} [skip ci]"
+          git push origin --tags
+          echo "bumpversion_commit=${git log -1 --pretty=%H}" >> $GITHUB_OUTPUT
