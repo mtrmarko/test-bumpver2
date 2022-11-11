@@ -26,8 +26,8 @@ jobs:
           sudo apt install bumpversion
           NEW_VERSION=$(bumpversion --allow-dirty --no-commit --list build | grep new_version | sed -r s,"^.*=",,)
           echo "new_version=${NEW_VERSION}" >> $GITHUB_OUTPUT
-          sudo git config --global user.name 'Mile'
-          sudo git config --global user.email 'milepajic@mile.com'
+          git config user.name 'Mile'
+          git config user.email 'milepajic@mile.com'
           git add .
           git commit -m "Bump Version to ${NEW_VERSION} [skip ci]"
           git push origin --tags
