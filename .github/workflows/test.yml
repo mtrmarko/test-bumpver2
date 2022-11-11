@@ -24,6 +24,7 @@ jobs:
         shell: bash
         run: |
           sudo apt install bumpversion
+          bumpversion --help
           NEW_VERSION=bumpversion --allow-dirty --no-commit --list build | grep new_version | sed -r s,"^.*=",,
           echo "new_version=${NEW_VERSION}" >> $GITHUB_OUTPUT
           git add .
